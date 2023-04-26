@@ -1,6 +1,7 @@
 import {Canvas} from "./canvas.js";
-import {RenderUI} from "./renderUI";
-import {Control} from "./control";
+import {RenderUI} from "./renderUI.js";
+import {Control} from "./control.js";
+import {Player} from "./player.js";
 
 class Game {
     constructor() {
@@ -10,8 +11,11 @@ class Game {
             ["ui", new Canvas()]
         ]);
 
-        this.control1 = new Control( [38, "up"], [40, "down"] );
-        this.control2 = new Control( [87, "up"], [83, "down"] );
+        this.control1 = new Control([ [87, "up"], [83, "down"] ]);
+        this.control2 = new Control([ [38, "up"], [40, "down"] ]);
+
+        this.player1 = new Player(this, 10, 200, this.control1, "#52C5D4");
+        this.player2 = new Player(this, this.screen.get("gamelayer").element.width - 20, 200, this.control2, "#EDEDED");
 
         this.UI = new RenderUI(this);
 
@@ -30,11 +34,18 @@ class Game {
     }
 
     update(time) {
-
+        this.player1.update(time);
+        this.player2.update(time);
     }
 
     loop(time) {
+        this.screen.get("gamelayer").clear();
+
         this.update(time);
+
+        this.player1.draw();
+        this.player2.draw();
+
         requestAnimationFrame( time => this.loop(time) );
     }
 

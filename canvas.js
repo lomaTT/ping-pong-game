@@ -21,7 +21,7 @@ export class Canvas {
             stroke = true;
         }
         if (typeof radius === "undefined") {
-            radius = 15;
+            radius = 5;
         }
         if (typeof radius === "number") {
             radius = {tl: radius, tr: radius, br: radius, bl: radius};
@@ -33,12 +33,12 @@ export class Canvas {
         }
         this.context.beginPath();
         this.context.moveTo(x + radius.tl, y);
-        this.context.lineTo(x + width - radius.tr, y);
-        this.context.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
-        this.context.lineTo(x + width, y + height - radius.br);
-        this.context.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
-        this.context.lineTo(x + radius.bl, y + height);
-        this.context.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+        this.context.lineTo(x + w - radius.tr, y);
+        this.context.quadraticCurveTo(x + w, y, x + w, y + radius.tr);
+        this.context.lineTo(x + w, y + h - radius.br);
+        this.context.quadraticCurveTo(x + w, y + w, x + w - radius.br, y + h);
+        this.context.lineTo(x + radius.bl, y + h);
+        this.context.quadraticCurveTo(x, y + h, x, y + h - radius.bl);
         this.context.lineTo(x, y + radius.tl);
         this.context.quadraticCurveTo(x, y, x + radius.tl, y);
         this.context.closePath();

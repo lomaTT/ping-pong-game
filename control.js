@@ -6,11 +6,11 @@ export class Control {
         this.keyMap = new Map(keyMap);
 
         document.addEventListener("keydown", (e) => this.update(e, true));
-        document.addEventListener("keyup", (e) => this.update(e, true));
+        document.addEventListener("keyup", (e) => this.update(e, false));
     }
 
     update(e, state) {
-        if (this.keyMap.has(e.code)) {
+        if (this.keyMap.has(e.keyCode)) {
             this[this.keyMap.get(e.keyCode)] = state;
         }
     }
